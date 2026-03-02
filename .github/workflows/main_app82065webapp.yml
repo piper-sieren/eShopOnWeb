@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ./publish
 
   deploy:
     runs-on: windows-latest
@@ -44,6 +44,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
+          path: ./publish
       
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -52,7 +53,7 @@ jobs:
           app-name: 'app82065webapp'
           slot-name: 'Production'
           package: ./publish
-
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9227B0DC2D204078B195A410C42B0412 }}
+
 
 
